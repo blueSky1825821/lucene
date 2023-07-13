@@ -74,6 +74,7 @@ public final class FST<T> implements Accountable {
 
   private static final int BIT_FINAL_ARC = 1 << 0;
   static final int BIT_LAST_ARC = 1 << 1;
+  //arc的target是上次编译的节点，如果是的话说明两个节点存储位置相邻，不用再特地记录arc的target
   static final int BIT_TARGET_NEXT = 1 << 2;
 
   // TODO: we can free up a bit if we can nuke this:
@@ -155,19 +156,19 @@ public final class FST<T> implements Accountable {
 
   private final int version;
 
-  /** Represents a single arc. */
+  /** Represents a single arc（弧）. term的每个字节都是边上的label*/
   public static final class Arc<T> {
-
+    // 边的输入
     // *** Arc fields.
 
     private int label;
-
+    // 边上的输出，这个输出是所有经过该arc的路径共享的
     private T output;
-
+    // 指向的节点
     private long target;
 
     private byte flags;
-
+    // nextFinalOutput就是这个arc指向的node的output，它只对以该node为终止节点的查找才有用，区别于arc的output
     private T nextFinalOutput;
 
     private long nextArc;

@@ -25,7 +25,7 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.TermStatistics;
 import org.apache.lucene.util.SmallFloat;
 
-/**
+/** 得分
  * Similarity defines the components of Lucene scoring.
  *
  * <p>Expert: Scoring API.
